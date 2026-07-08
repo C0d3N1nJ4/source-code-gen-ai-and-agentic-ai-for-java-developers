@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:chapter11;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  ai:
+    model:
+      chat: none
+      embedding: none
+    openai:
+      api-key: test-key
+
+acme:
+  assistant:
+    coordinator-system-prompt: Coordinator prompt for tests
+    semantic-top-k: 2
+    short-term-window-size: 6
+    mcp:
+      hr-base-url: http://localhost:18091
+      finance-base-url: http://localhost:18092
+      operations-base-url: http://localhost:18093

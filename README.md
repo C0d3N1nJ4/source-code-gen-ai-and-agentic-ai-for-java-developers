@@ -1,6 +1,8 @@
 # source-code-gen-ai-and-agentic-ai-for-java-developers
 A practical guide to building production-ready AI applications with Java 25 and Spring AI 4. Learn RAG, agents, MCP, vector databases, tool calling, and enterprise AI architecture through hands-on projects and real-world examples.
 
+This repository contains the source code for the book available at [Gen AI for Java Developers](https://3845977863659.gumroad.com/l/gen-ai-for-java-developers).
+
 ## Chapter Projects
 
 Use the links below to jump directly to each runnable chapter project in this repository.
@@ -38,3 +40,11 @@ Use the links below to jump directly to each runnable chapter project in this re
 
 - [MCP Enterprise Assistant Client](chapter%2010/chapter-10-mcp-enterprise-assistant-client/README.md) - Assistant application that discovers and invokes remote HR tools over MCP.
 - [MCP HR Server](chapter%2010/chapter-10-mcp-hr-server/README.md) - HR-focused MCP server that exposes reusable domain tools.
+
+### Chapter 11
+
+- [Memory and Multi-Agent Systems](chapter%2011/chapter-11-memory-multi-agent/README.md) - Memory-enabled multi-agent enterprise assistant with coordinator orchestration and specialist agents.
+
+### Chapter 12
+
+- [AI Security for Java Developers](chapter%2012/chapter-12-ai-security/README.md) - Defense-in-depth security for prompts, RAG, tools, MCP, memory, and multi-agent workflows.

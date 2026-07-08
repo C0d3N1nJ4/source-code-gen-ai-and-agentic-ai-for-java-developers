@@ -1,0 +1,71 @@
+spring:
+  application:
+    name: chapter-12-ai-security
+  profiles:
+    active: local
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/chapter12}
+    username: ${DB_USERNAME:chapter12}
+    password: ${DB_PASSWORD:chapter12}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+  ai:
+    model:
+      chat: ollama
+      embedding: ollama
+    openai:
+      chat:
+        enabled: false
+      embedding:
+        enabled: false
+      audio:
+        speech:
+          enabled: false
+        transcription:
+          enabled: false
+      image:
+        enabled: false
+      moderation:
+        enabled: false
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        options:
+          model: ${OLLAMA_CHAT_MODEL:llama3.1}
+      embedding:
+        options:
+          model: ${OLLAMA_EMBEDDING_MODEL:nomic-embed-text}
+
+acme:
+  security:
+    jwt:
+      secret: ${ACME_JWT_SECRET:chapter12-secret-key-for-jwt-signing-123456}
+    prompt:
+      block-threshold: ${PROMPT_BLOCK_THRESHOLD:60}
+      max-prompt-length: ${PROMPT_MAX_LENGTH:8000}
+    memory:
+      retention-days: ${MEMORY_RETENTION_DAYS:180}
+      context-window-size: ${MEMORY_CONTEXT_WINDOW:12}
+    mcp:
+      timeout-millis: ${MCP_TIMEOUT_MS:3000}
+      retries: ${MCP_RETRIES:2}
+    governance:
+      auto-approve-expense-limit: ${EXPENSE_AUTO_APPROVE_LIMIT:500}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always
+
+server:
+  port: 8080
