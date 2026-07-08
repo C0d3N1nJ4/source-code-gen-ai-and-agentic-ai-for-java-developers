@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: chapter-06-vector-database-test
+  datasource:
+    url: jdbc:postgresql://localhost:5432/acme_ai
+    username: postgres
+    password: postgres
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      embedding:
+        options:
+          model: nomic-embed-text
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+        dimensions: 768
+
+app:
+  semantic-search:
+    top-k: 5
+  chunking:
+    default-chunk-size: 450
+    default-overlap: 60
+
+server:
+  port: 8080

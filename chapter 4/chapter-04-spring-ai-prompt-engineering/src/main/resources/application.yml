@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: chapter-04-spring-ai-prompt-engineering
+  ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        options:
+          model: ${OLLAMA_CHAT_MODEL:llama3}
+          temperature: ${OLLAMA_TEMPERATURE:0.2}
+          max-tokens: ${OLLAMA_MAX_TOKENS:500}
+
+app:
+  prompts:
+    default-audience: ${APP_DEFAULT_AUDIENCE:experienced Java developers}
+    default-style: ${APP_DEFAULT_STYLE:concise, practical, enterprise-focused}
+
+server:
+  port: 8080

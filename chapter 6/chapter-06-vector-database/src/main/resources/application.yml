@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: acme-enterprise-assistant-chapter6
+  datasource:
+    url: ${POSTGRES_URL:jdbc:postgresql://localhost:5432/acme_ai}
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+  ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      embedding:
+        options:
+          model: ${OLLAMA_EMBEDDING_MODEL:nomic-embed-text}
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+        dimensions: ${PGVECTOR_DIMENSIONS:768}
+
+app:
+  semantic-search:
+    top-k: ${SEMANTIC_SEARCH_TOP_K:5}
+  chunking:
+    default-chunk-size: ${DEFAULT_CHUNK_SIZE:450}
+    default-overlap: ${DEFAULT_CHUNK_OVERLAP:60}
+
+server:
+  port: 8080

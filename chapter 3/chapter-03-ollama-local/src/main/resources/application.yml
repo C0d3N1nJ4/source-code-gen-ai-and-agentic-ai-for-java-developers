@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: chapter-03-ollama-local
+  ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        options:
+          model: ${OLLAMA_CHAT_MODEL:llama3.2}
+          temperature: ${OLLAMA_TEMPERATURE:0.2}
+
+assistant:
+  system-message: You are the Acme Corporation AI assistant. You help developers with Java and Spring questions using clear, practical explanations.
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+server:
+  port: 8080

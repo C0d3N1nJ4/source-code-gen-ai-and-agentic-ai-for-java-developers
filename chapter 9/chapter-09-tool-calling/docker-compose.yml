@@ -1,0 +1,46 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: chapter9-postgres
+    environment:
+      POSTGRES_DB: acme_ai
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - chapter9-pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: chapter9-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - chapter9-ollama:/root/.ollama
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chapter9-tool-calling-app
+    environment:
+      POSTGRES_URL: jdbc:postgresql://postgres:5432/acme_ai
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      OLLAMA_BASE_URL: http://ollama:11434
+      OLLAMA_CHAT_MODEL: llama3.2
+      OLLAMA_EMBEDDING_MODEL: nomic-embed-text
+      OLLAMA_MAX_TOKENS: 400
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - ollama
+    restart: unless-stopped
+
+volumes:
+  chapter9-pgdata:
+  chapter9-ollama:

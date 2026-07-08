@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: chapter-10-mcp-hr-server
+  ai:
+    mcp:
+      server:
+        name: chapter-10-mcp-hr-server
+        version: 1.0.0
+        protocol: streamable
+        streamable-http:
+          mcp-endpoint: /mcp
+  datasource:
+    url: ${HR_DB_URL:jdbc:postgresql://localhost:5434/hr_mcp}
+    username: ${HR_DB_USER:postgres}
+    password: ${HR_DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+server:
+  port: ${HR_SERVER_PORT:8091}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.acme.hrmcp: INFO

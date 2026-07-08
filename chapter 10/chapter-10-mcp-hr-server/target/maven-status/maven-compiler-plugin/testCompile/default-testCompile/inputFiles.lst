@@ -1,0 +1,4 @@
+/workspaces/gen-ai-for-java-developers/chapter 10/chapter-10-mcp-hr-server/src/test/java/com/acme/hrmcp/integration/McpStreamableHttpIntegrationTest.java
+/workspaces/gen-ai-for-java-developers/chapter 10/chapter-10-mcp-hr-server/src/test/java/com/acme/hrmcp/service/EmployeeServiceTest.java
+/workspaces/gen-ai-for-java-developers/chapter 10/chapter-10-mcp-hr-server/src/test/java/com/acme/hrmcp/service/LeaveServiceTest.java
+/workspaces/gen-ai-for-java-developers/chapter 10/chapter-10-mcp-hr-server/src/test/java/com/acme/hrmcp/tool/HrCapabilityToolServiceTest.java

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: chapter-03-openai-cloud
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: ${OPENAI_CHAT_MODEL:gpt-4o-mini}
+          temperature: ${OPENAI_TEMPERATURE:0.2}
+
+assistant:
+  system-message: You are the Acme Corporation AI assistant. You help developers with Java and Spring questions using clear, practical explanations.
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+server:
+  port: 8080

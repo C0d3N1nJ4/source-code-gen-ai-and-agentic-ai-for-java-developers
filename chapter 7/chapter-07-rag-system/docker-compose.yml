@@ -1,0 +1,47 @@
+services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: chapter7-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    restart: unless-stopped
+
+  pgvector:
+    image: pgvector/pgvector:pg17
+    container_name: chapter7-pgvector
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: acme_ai
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgvector-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: chapter7-rag-system-app
+    ports:
+      - "8080:8080"
+    environment:
+      OLLAMA_BASE_URL: http://ollama:11434
+      OLLAMA_CHAT_MODEL: llama3.2
+      OLLAMA_EMBEDDING_MODEL: nomic-embed-text
+      OLLAMA_TEMPERATURE: 0.2
+      POSTGRES_URL: jdbc:postgresql://pgvector:5432/acme_ai
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      RAG_TOP_K: 5
+    depends_on:
+      - ollama
+      - pgvector
+    restart: unless-stopped
+
+volumes:
+  ollama-data:
+  pgvector-data:
