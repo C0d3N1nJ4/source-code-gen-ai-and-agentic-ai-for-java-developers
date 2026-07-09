@@ -48,3 +48,15 @@ Use the links below to jump directly to each runnable chapter project in this re
 ### Chapter 12
 
 - [AI Security for Java Developers](chapter%2012/chapter-12-ai-security/README.md) - Defense-in-depth security for prompts, RAG, tools, MCP, memory, and multi-agent workflows.
+
+### Chapter 13
+
+- [AI Testing](chapter%2013/chapter-13-ai-testing/README.md) - Production-grade AI testing and evaluation framework for prompts, RAG, tools, MCP, memory, and multi-agent workflows.
+
+### Chapter 14
+
+- [AI Observability](chapter%2014/chapter-14-ai-observability/README.md) - End-to-end observability with traces, metrics, logs, dashboards, and alerts for enterprise AI workflows.
+
+### Chapter 15
+
+- [Enterprise AI Deployment](chapter%2015/chapter-15-enterprise-ai-deployment/README.md) - Production deployment architecture with Docker and Kubernetes for enterprise AI operations.
