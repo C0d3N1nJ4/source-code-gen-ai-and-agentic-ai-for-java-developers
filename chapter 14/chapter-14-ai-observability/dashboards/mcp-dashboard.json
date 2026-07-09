@@ -1,0 +1,20 @@
+{
+  "title": "MCP Dashboard",
+  "uid": "mcp-dashboard",
+  "schemaVersion": 39,
+  "version": 1,
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "MCP Failure Rate",
+      "targets": [{ "expr": "ai_mcp_failure_rate" }],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Server Health",
+      "targets": [{ "expr": "up{job=\"chapter14-app\"}" }],
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 }
+    }
+  ]
+}

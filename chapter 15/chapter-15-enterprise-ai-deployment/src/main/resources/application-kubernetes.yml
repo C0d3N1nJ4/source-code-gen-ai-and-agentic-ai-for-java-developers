@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: kubernetes
+assistant:
+  security:
+    bearer-token: ${ASSISTANT_SECURITY_BEARER_TOKEN}
+  mcp:
+    base-url: ${ASSISTANT_MCP_BASE_URL:http://mock-mcp-server.default.svc.cluster.local:8080}

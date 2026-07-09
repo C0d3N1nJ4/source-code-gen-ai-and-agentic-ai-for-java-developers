@@ -1,0 +1,18 @@
+[
+  {
+    "scenario": "Submit annual leave for next Friday",
+    "expectedTool": "submitLeave"
+  },
+  {
+    "scenario": "Create expense for Amsterdam conference",
+    "expectedTool": "createExpense"
+  },
+  {
+    "scenario": "Lookup employee EMP-1001",
+    "expectedTool": "lookupEmployee"
+  },
+  {
+    "scenario": "Restart server PROD-DB-01 without admin",
+    "expectedTool": "restartServer"
+  }
+]

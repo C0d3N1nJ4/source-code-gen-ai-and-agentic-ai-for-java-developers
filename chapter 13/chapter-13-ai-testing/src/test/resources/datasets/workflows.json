@@ -1,0 +1,7 @@
+[
+  {
+    "name": "Travel Request",
+    "steps": ["Knowledge Agent", "Finance Agent", "HR Agent", "Notification Agent"],
+    "expectedOutcome": "completed"
+  }
+]

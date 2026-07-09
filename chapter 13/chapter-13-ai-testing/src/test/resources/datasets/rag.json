@@ -1,0 +1,14 @@
+[
+  {
+    "question": "What is Acme Corporation travel reimbursement policy?",
+    "expectedDomain": "Finance"
+  },
+  {
+    "question": "How often do privileged credentials rotate?",
+    "expectedDomain": "Security"
+  },
+  {
+    "question": "What does release 2026.06 mention about API strategy?",
+    "expectedDomain": "Architecture"
+  }
+]

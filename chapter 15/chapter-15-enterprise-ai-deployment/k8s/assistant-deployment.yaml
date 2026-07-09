@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: assistant-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: assistant-app
+  template:
+    metadata:
+      labels:
+        app: assistant-app
+    spec:
+      containers:
+        - name: assistant-app
+          image: acme/chapter-15-enterprise-ai-deployment:1.0.0
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: assistant-config
+            - secretRef:
+                name: assistant-secrets
+          resources:
+            requests:
+              cpu: "300m"
+              memory: "512Mi"
+            limits:
+              cpu: "1000m"
+              memory: "1024Mi"
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 15

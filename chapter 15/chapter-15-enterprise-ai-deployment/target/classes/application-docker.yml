@@ -1,0 +1,12 @@
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:postgresql://postgres-pgvector:5432/assistant
+  ai:
+    ollama:
+      base-url: http://ollama:11434
+assistant:
+  mcp:
+    base-url: http://mock-mcp-server:8080

@@ -1,0 +1,10 @@
+[
+  {
+    "scenario": "Travel approval request",
+    "expectedAgents": ["Coordinator Agent", "HR Agent", "Finance Agent"]
+  },
+  {
+    "scenario": "Architecture release summary",
+    "expectedAgents": ["Coordinator Agent", "Knowledge Agent"]
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "documents": [
+    {
+      "id": "finance-travel-policy",
+      "domain": "Finance",
+      "title": "Travel Reimbursement Policy"
+    },
+    {
+      "id": "security-password-policy",
+      "domain": "Security",
+      "title": "Password Rotation Policy"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+spring:
+  application:
+    name: chapter-14-ai-observability
+  autoconfigure:
+    exclude:
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiChatAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiEmbeddingAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiImageAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiAudioSpeechAutoConfiguration
+      - org.springframework.ai.model.openai.autoconfigure.OpenAiAudioTranscriptionAutoConfiguration
+      - org.springframework.ai.vectorstore.pgvector.autoconfigure.PgVectorStoreAutoConfiguration
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY:local-test-key}
+    model:
+      chat: ollama
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        options:
+          model: ${OLLAMA_CHAT_MODEL:llama3.1}
+      embedding:
+        options:
+          model: ${OLLAMA_EMBEDDING_MODEL:nomic-embed-text}
+
+acme:
+  observability:
+    prompt-version: ${ACME_PROMPT_VERSION:v5.0}
+    cost:
+      input-token-unit-cost: ${ACME_INPUT_TOKEN_COST:0.0000015}
+      output-token-unit-cost: ${ACME_OUTPUT_TOKEN_COST:0.0000020}
+    thresholds:
+      response-latency-ms: ${ACME_RESPONSE_LATENCY_THRESHOLD_MS:5000}
+      tool-failure-rate-percent: ${ACME_TOOL_FAILURE_THRESHOLD_PERCENT:2}
+      mcp-timeout-rate-percent: ${ACME_MCP_TIMEOUT_THRESHOLD_PERCENT:1}
+      grounding-score-min: ${ACME_GROUNDING_SCORE_MIN:0.90}
+      daily-token-budget: ${ACME_DAILY_TOKEN_BUDGET:1500000}
+  security:
+    evaluator-username: ${ACME_EVALUATOR_USERNAME:evaluator}
+    evaluator-password: ${ACME_EVALUATOR_PASSWORD:evaluator-pass}
+    evaluator-role: ${ACME_EVALUATOR_ROLE:EVALUATOR}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,env,configprops
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    tracing:
+      endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:http://localhost:4318/v1/traces}
+    metrics:
+      export:
+        url: ${OTEL_EXPORTER_OTLP_METRICS_ENDPOINT:http://localhost:4318/v1/metrics}
+  endpoint:
+    health:
+      show-details: when-authorized
+    env:
+      show-values: when-authorized
+    configprops:
+      show-values: when-authorized
+
+server:
+  port: 8080

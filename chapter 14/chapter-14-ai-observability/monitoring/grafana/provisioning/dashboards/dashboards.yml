@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: acme-ai-observability
+    orgId: 1
+    folder: Acme AI Observability
+    type: file
+    disableDeletion: true
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards
