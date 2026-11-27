@@ -1,31 +1,43 @@
-# Acme Enterprise Assistant — Version 2 foundation
+# Acme Enterprise Assistant — Chapter 3
 
-Chapter 3 compatibility spike. Java 25, Spring Boot 4.2.0 and Spring AI 2.1.0. This is a local learning application, not a secure production service. It binds to loopback and has no tools, business mutations, retrieval or memory.
+Local learning application, not a production service. Java 25, Gradle Wrapper, Spring Boot 4.2.0 and Spring AI 2.1.0. The default binds to loopback; no enterprise data, tools, memory or business mutations.
 
-## Build and test
-
-Install Java 25. Run from version-2:
+From version-2:
 
     ./gradlew :acme-enterprise-assistant:build
 
-The MVC tests mock the application service and do not call an AI model. The Gradle Wrapper is committed and its CI validation is pending.
+Default tests mock model boundaries and do not need Ollama or credentials.
 
-## Optional local smoke test
+## Ollama
 
-Install Ollama and start it if needed. Pull a model:
+Start Ollama, pull llama3.2, then:
 
-    ollama pull llama3.2
     ./gradlew :acme-enterprise-assistant:bootRun
 
-In another terminal:
-
     curl -fsS http://localhost:8080/actuator/health
-    curl -fsS -H 'Content-Type: application/json' -d '{"message":"Explain what a Java record is."}' http://localhost:8080/api/v1/assistant/ask
+    curl -i -H 'Content-Type: application/json' -d '{"message":"Explain Java records."}' http://localhost:8080/api/v1/assistant/ask
+    curl -N -H 'Content-Type: application/json' -d '{"message":"Explain Java records."}' http://localhost:8080/api/v1/assistant/stream
 
-Expect HTTP 200 and a nonempty answer, not exact wording. Set OLLAMA_BASE_URL and OLLAMA_MODEL to override defaults. Record model digest and runtime version when validating. Stop the application after testing. Never expose this unauthenticated learning endpoint to a network.
+The ask endpoint returns JSON with an answer. Streaming sends token events then a done event; a provider failure sends an error event instead (HTTP status may already be committed). Invalid input returns 400, provider failures return sanitized 503/504 problems for non-streamed requests. X-Request-Id identifies the HTTP request, not a distributed trace. Local actuator health and metrics are available. No prompt or response logging is added.
 
-## Validation
+## OpenAI alternative
 
-Official Spring AI release notes confirm the Spring Boot 4.2 baseline: https://spring.io/blog/2026/11/20/spring-ai-2-1-0-GA-available-now/
+Set OPENAI_API_KEY securely in your environment and OPENAI_MODEL to a supported model. Never commit keys or send sensitive input. Activate the openai profile:
 
-Compilation, application startup and model execution require recorded evidence before the manuscript baseline is changed. No live inference is run by default. Streaming, provider switching, explicit provider timeouts and error mapping are follow-up Chapter 3 work.
+    SPRING_PROFILES_ACTIVE=openai ./gradlew :acme-enterprise-assistant:bootRun
+
+The same service/controller use ChatClient; provider behavior differs. Cloud execution may incur charges. The provider property layout must be verified against the pinned release during smoke testing.
+
+## Opt-in live tests
+
+    ./gradlew :acme-enterprise-assistant:test -PliveModel=true --rerun-tasks
+
+For OpenAI only after setting credentials/model and explicitly accepting costs:
+
+    SPRING_PROFILES_ACTIVE=openai ./gradlew :acme-enterprise-assistant:test -PliveModel=true --rerun-tasks
+
+Tests assert nonempty output, not exact text. Record runtime/model digest and results. ACME_MODEL_TIMEOUT defaults to 60s; ACME_HTTP_ASYNC_TIMEOUT defaults to 75s and should exceed model timeout. The reactive deadline bounds application waiting, not guaranteed provider cancellation or billing. Retries configured to one attempt. Production authentication, rate/concurrency controls and transport-specific timeout tuning are future work.
+
+## Validation status
+
+Offline CI and live smoke results must be recorded before creating v2-chapter-03. No live execution claimed here.
