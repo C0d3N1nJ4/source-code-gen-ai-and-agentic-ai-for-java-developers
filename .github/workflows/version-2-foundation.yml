@@ -1,0 +1,29 @@
+name: Version 2 foundation
+on:
+  pull_request:
+    paths:
+      - 'version-2/**'
+      - '.github/workflows/version-2-foundation.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'version-2/**'
+      - '.github/workflows/version-2-foundation.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: version-2/acme-enterprise-assistant
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+          cache-dependency-path: version-2/acme-enterprise-assistant/pom.xml
+      - run: mvn -B verify

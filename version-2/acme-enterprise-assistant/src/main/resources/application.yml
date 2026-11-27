@@ -1,0 +1,19 @@
+server:
+  address: 127.0.0.1
+spring:
+  application:
+    name: acme-enterprise-assistant
+  ai:
+    model:
+      chat: ollama
+      embedding: none
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      chat:
+        model: ${OLLAMA_MODEL:llama3.2}
+        num-predict: 512
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
