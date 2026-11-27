@@ -4,18 +4,18 @@ Chapter 3 compatibility spike. Java 25, Spring Boot 4.2.0 and Spring AI 2.1.0. T
 
 ## Build and test
 
-Install Java 25 and Maven 3.9.x. Run from this directory:
+Install Java 25 and Gradle 9.1.0. Run from version-2:
 
-    mvn -B verify
+    gradle :acme-enterprise-assistant:build
 
-The MVC tests mock the application service and do not call an AI model. Maven Wrapper generation is pending; do not claim wrapper support yet.
+The MVC tests mock the application service and do not call an AI model. Gradle Wrapper generation is pending; do not claim wrapper support yet.
 
 ## Optional local smoke test
 
 Install Ollama and start it if needed. Pull a model:
 
     ollama pull llama3.2
-    mvn spring-boot:run
+    gradle :acme-enterprise-assistant:bootRun
 
 In another terminal:
 

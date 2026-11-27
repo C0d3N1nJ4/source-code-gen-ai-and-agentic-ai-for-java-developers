@@ -24,6 +24,7 @@ jobs:
         with:
           distribution: temurin
           java-version: '25'
-          cache: maven
-          cache-dependency-path: 'version-2/**/pom.xml'
-      - run: mvn -B verify
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.1.0'
+      - run: gradle --no-daemon clean build
