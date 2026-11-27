@@ -1,0 +1,17 @@
+[versions]
+spring-boot = "4.2.0"
+spring-ai = "2.1.0"
+[libraries]
+boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
+ai-bom = { module = "org.springframework.ai:spring-ai-bom", version.ref = "spring-ai" }
+ollama = { module = "org.springframework.ai:spring-ai-starter-model-ollama" }
+openai = { module = "org.springframework.ai:spring-ai-starter-model-openai" }
+reactor-test = { module = "io.projectreactor:reactor-test" }
+webmvc = { module = "org.springframework.boot:spring-boot-starter-webmvc" }
+validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
+actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+boot-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+webmvc-test = { module = "org.springframework.boot:spring-boot-webmvc-test" }
+junit-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
