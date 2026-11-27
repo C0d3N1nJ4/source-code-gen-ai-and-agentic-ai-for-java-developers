@@ -14,7 +14,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: version-2
@@ -24,7 +24,11 @@ jobs:
         with:
           distribution: temurin
           java-version: '25'
+      - uses: gradle/actions/wrapper-validation@v4
       - uses: gradle/actions/setup-gradle@v4
+      - run: ./gradlew --no-daemon clean build
+      - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          gradle-version: '9.1.0'
-      - run: gradle --no-daemon clean build
+          name: version-2-test-results
+          path: version-2/**/build/test-results/test/*.xml

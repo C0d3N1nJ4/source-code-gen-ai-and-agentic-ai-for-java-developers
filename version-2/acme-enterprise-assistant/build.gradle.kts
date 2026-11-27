@@ -1,12 +1,8 @@
-plugins { java; alias(libs.plugins.spring.boot) }
+plugins { id("acme.spring-ai-conventions") }
 dependencies {
-    implementation(platform(libs.boot.bom))
-    implementation(platform(libs.ai.bom))
     implementation(libs.webmvc)
     implementation(libs.validation)
     implementation(libs.actuator)
     implementation(libs.ollama)
-    testImplementation(libs.boot.test)
     testImplementation(libs.webmvc.test)
-    testRuntimeOnly(libs.junit.launcher)
 }
